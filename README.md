@@ -1,1 +1,1 @@
-# simple-game-pyxel
+# Simple-python-Games
