@@ -5,9 +5,11 @@ class App:
         self.mouseX = 0
         self.mouseY = 0
 
+        self.scrollSpeed = .5
+
         self.cubeX = 10
         self.cubeY = 10
-        self.cubeSize = 30
+        self.cubeSize = 20
         self.cubeVX = 0
         self.cubeVY = 0
         self.cubePrevX = self.cubeX
@@ -23,6 +25,11 @@ class App:
         pyxel.run(self.update, self.draw)
 
     def update(self):
+        if pyxel.btn(pyxel.KEY_UP):
+            self.cubeSize += self.scrollSpeed
+        elif pyxel.btn(pyxel.KEY_DOWN):
+            self.cubeSize -= self.scrollSpeed
+
         self.mouseX = pyxel.mouse_x
         self.mouseY = pyxel.mouse_y
 
@@ -47,6 +54,15 @@ class App:
 
         self.cubePrevX = self.cubeX
         self.cubePrevY = self.cubeY
+
+        if self.cubeX < 0:
+            self.cubeX = 0
+        elif self.cubeX + self.cubeSize > 160:
+            self.cubeX = 160 - self.cubeSize
+        if self.cubeY < 0:
+            self.cubeY = 0
+        elif self.cubeY + self.cubeSize > 120:
+            self.cubeY = 120 - self.cubeSize
 
     def draw(self):
         pyxel.cls(1)
